@@ -1,84 +1,10 @@
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
+:root {
+  --box-shadow: inset 0 -0.0625rem hsla(0, 0%, 12%, 1);
+}
+
+*,
+*::after,
+*::before {
   margin: 0;
   padding: 0;
   border: 0;
@@ -88,11 +14,6 @@ video {
   box-sizing: border-box;
 }
 
-*::after,
-*::before {
-  box-sizing: inherit;
-}
-
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -100,6 +21,43 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: hsla(0, 0%, 12%, 1);
+}
+
+a {
+  text-decoration: none;
+  color: hsla(0, 0%, 12%, 1);
+}
+
+button {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  color: hsla(0, 0%, 12%, 1);
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-size: 1.125rem;
+  font-weight: 400;
+}
+
+ul {
+  list-style-type: none;
+}
+
+::placeholder {
+  color: #000;
+}
+
+button,
+a {
+  cursor: pointer;
 }
 
 code {

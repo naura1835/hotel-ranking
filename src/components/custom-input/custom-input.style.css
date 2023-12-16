@@ -1,0 +1,32 @@
+.custom-input {
+  display: flex;
+  flex-direction: column;
+  max-width: 31.9375rem;
+  width: 100%;
+}
+
+.custom-input__label {
+  text-transform: uppercase;
+  margin-bottom: 0.12rem;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.custom-input__inner-div {
+  border-radius: 0.3125rem;
+  box-shadow: 0 0 0 0.5px #000;
+  width: 100%;
+  padding: 0.9rem 1.12rem;
+}
+
+.custom-input__inner-div > input,
+.custom-input__inner-div > select {
+  width: 100%;
+  background-color: transparent;
+  outline: none;
+}
+
+.error {
+  color: red;
+}

@@ -1,0 +1,28 @@
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.94rem 1rem;
+  box-shadow: var(--box-shadow);
+  margin-bottom: 1.75rem;
+  position: relative;
+}
+nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.9375rem;
+  font-weight: 400;
+}
+
+.create-category {
+  background-color: transparent;
+  border-radius: 0.125rem;
+  border: 1px solid #1e1e1e;
+  display: grid;
+  place-items: center;
+  padding: 0.4375rem 0.6875rem;
+  width: 8.75rem;
+  font-size: 0.9375rem;
+  font-weight: 400;
+}

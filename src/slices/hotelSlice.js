@@ -11,7 +11,7 @@ const addNewHotelToList = (hotels, newHotel) => {
   if (hotelExists) {
     return [...hotels];
   }
-  return [...hotels, { id: hotels.length + 1, ...newHotel }];
+  return [...hotels, newHotel];
 };
 
 const deleteHotelFromList = (hotels, hotelToDelete) => {

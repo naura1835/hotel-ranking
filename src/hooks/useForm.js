@@ -53,7 +53,11 @@ const useForm = () => {
     setErrors({ ...other });
   };
 
-  return { data, errors, setData, handleChange, validate };
+  const resetFormFields = () => {
+    setData({ hotelName: "", country: "", address: "" });
+  };
+
+  return { data, errors, setData, handleChange, resetFormFields, validate };
 };
 
 export default useForm;

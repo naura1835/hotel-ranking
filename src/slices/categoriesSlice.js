@@ -30,6 +30,22 @@ const updateCategoryGroup = (categories, key, hotel) => {
   return categories;
 };
 
+const deleteHotel = (categories, key, hotel) => {
+  categories[key] = categories[key].filter((item) => item.id !== hotel.id);
+  // for (let category in categories) {
+  //   if (
+  //     // eslint-disable-next-line no-prototype-builtins
+  //     categories.hasOwnProperty(category) &&
+  //     Array.isArray(categories[category])
+  //   ) {
+  //     const updatedCategory = categories[category].filter(
+  //       (item) => item.id !== hotel.id
+  //     );
+  //     categories[category] = updatedCategory;
+  //   }
+  // }
+};
+
 export const categorySlice = createSlice({
   name: "category",
   initialState: {
@@ -61,10 +77,19 @@ export const categorySlice = createSlice({
 
       updateCategoryGroup(state.categoryGroup, payload.key, payload.hotel);
     },
+    deleteItemFromCategory: (state, action) => {
+      const { payload } = action;
+      // deleteHotel(state.categoryGroup, action.payload);
+      deleteHotel(state.categoryGroup, payload.key, payload.hotel);
+    },
   },
 });
 
-export const { createCategory, deleteCategory, updateCategory } =
-  categorySlice.actions;
+export const {
+  createCategory,
+  deleteCategory,
+  updateCategory,
+  deleteItemFromCategory,
+} = categorySlice.actions;
 
 export default categorySlice.reducer;

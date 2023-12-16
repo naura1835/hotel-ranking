@@ -1,0 +1,30 @@
+.hotel-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.94rem;
+  max-width: 600px;
+  margin-inline: auto;
+  padding: 0.75rem 1rem;
+  position: relative;
+}
+
+.hotel-form__btn {
+  width: fit-content;
+  background-color: #1e1e1e;
+  border: none;
+  color: #fff;
+  display: grid;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  place-items: center;
+  padding: 0.75rem 2.1rem;
+}
+
+@media (min-width: 900px) {
+  .hotel-form::before {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    content: url("x");
+  }
+}
