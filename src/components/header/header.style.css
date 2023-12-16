@@ -26,3 +26,8 @@ nav {
   font-size: 0.9375rem;
   font-weight: 400;
 }
+.create-category--active {
+  background-color: #1e1e1e;
+  border: none;
+  color: #fff;
+}

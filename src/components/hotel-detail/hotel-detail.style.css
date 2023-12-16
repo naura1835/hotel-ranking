@@ -1,0 +1,39 @@
+.hotel-listing__list__item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-bottom: 1.12rem;
+  border-bottom: 1px solid #000;
+  position: relative;
+}
+
+.hotel-listing__list__item::after {
+  position: absolute;
+  bottom: 10%;
+  left: 0;
+  content: url("../../assets/edit.svg");
+  height: 25px;
+  width: 25px;
+  display: none;
+}
+
+.hotel-listing__list__item:hover::after {
+  display: block;
+}
+
+.hotel-listing__list__item:last-child {
+  border-bottom: none;
+}
+
+.list__item__header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.category {
+  align-self: flex-end;
+  border-radius: 0.125rem;
+  border: 1px solid #000;
+  width: fit-content;
+  padding: 0.15rem;
+}

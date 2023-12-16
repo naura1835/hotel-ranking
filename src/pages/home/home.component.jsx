@@ -1,40 +1,32 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { deleteHotel } from "../../slices/hotelSlice";
-// import { updateCategory } from "../../slices/categoriesSlice";
+import {
+  changeCategoryLabel,
+  sortHotelBasedonCategory,
+} from "../../util/utilFunc";
 
 import hero from "../../assets/hero.jpg";
 import filterIcon from "../../assets/filter.svg";
-import deleteIcon from "../../assets/delete.svg";
+import HotelDetail from "../../components/hotel-detail/hotel-detail.component";
 
 import "./home.style.css";
-import { deleteItemFromCategory } from "../../slices/categoriesSlice";
-import { useState } from "react";
 
 const Home = () => {
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   const hotelList = useSelector((state) => state.hotel.hotelList);
-
-  // const [filteredList, setFilteredList] = useState([]);
   const [currentCategory, setCurrentCategory] = useState("all");
   const category = useSelector((state) => state.category.categoryGroup);
-  const dispatch = useDispatch();
-
-  const deleteHotelFromList = (hotel) => {
-    dispatch(deleteHotel(hotel));
-    dispatch(deleteItemFromCategory({ key: hotel.category, hotel: hotel }));
-  };
 
   const filteredHotels =
-    currentCategory === "all" ? hotelList : category[currentCategory] || [];
+    currentCategory === "all"
+      ? sortHotelBasedonCategory(hotelList)
+      : category[currentCategory] || [];
 
-  const changeCategoryLabel = (label) => {
-    return label == "oneStar"
-      ? "1 star"
-      : label == "twoStar"
-      ? "2 star"
-      : "3 star";
-  };
+  const headingText =
+    currentCategory === "all"
+      ? "All hotels"
+      : `${changeCategoryLabel(currentCategory)} star hotels`;
 
   return (
     <main className="hotel-listing">
@@ -46,7 +38,7 @@ const Home = () => {
       {hotelList.length <= 0 ? (
         <div className="no-hotels">
           <p>No hotels, care to add hotels to list...</p>
-          <Link to="/hotel-form" className="add-hotel-link">
+          <Link to="/hotel-form" className="no-hotels__add-hotel-link">
             Add New Hotel
           </Link>
         </div>
@@ -54,7 +46,9 @@ const Home = () => {
         <>
           <div className="hotel-listing__main-body">
             <div className="hotel-listing__main-body__header">
-              <h2 className="hotel-listing__main-body__heading">ALL HOTELS</h2>
+              <h2 className="hotel-listing__main-body__heading">
+                {headingText}
+              </h2>
               <button
                 className={
                   isFilterModalOpen
@@ -66,56 +60,47 @@ const Home = () => {
                 <span>Filter</span>
                 <img src={filterIcon} alt="fllter icon" />
               </button>
-            </div>
-            {isFilterModalOpen && (
-              <ul className="filter-modal">
-                <li
-                  className="filter-modal__list-item"
-                  onClick={() => {
-                    setCurrentCategory("all");
-                    setIsFilterModalOpen(false);
-                  }}
-                >
-                  All hotels
-                </li>
-                {Object.keys(category).map((item, index) => {
-                  const labelText = changeCategoryLabel(item);
+              {isFilterModalOpen && (
+                <ul className="filter-modal">
+                  <li
+                    className="filter-modal__list-item"
+                    onClick={() => {
+                      setCurrentCategory("all");
+                      setIsFilterModalOpen(false);
+                    }}
+                  >
+                    All hotels
+                  </li>
+                  {Object.keys(category).map((item, index) => {
+                    const labelText = changeCategoryLabel(item);
 
-                  return (
-                    <li
-                      className="filter-modal__list-item"
-                      key={index}
-                      onClick={() => {
-                        setCurrentCategory(item);
-                        setIsFilterModalOpen(false);
-                      }}
-                    >
-                      {labelText} hotels
-                    </li>
-                  );
-                })}
-              </ul>
-            )}
+                    return (
+                      <li
+                        className="filter-modal__list-item"
+                        key={index}
+                        onClick={() => {
+                          setCurrentCategory(item);
+                          setIsFilterModalOpen(false);
+                        }}
+                      >
+                        {labelText} hotels
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
+            </div>
+
             <ul className="hotel-listing__list">
               {filteredHotels.map((hotel, index) => {
                 const categoryLabel = changeCategoryLabel(hotel.category);
 
                 return (
-                  <li key={index} className="hotel-listing__list__item">
-                    <div className="list__item__header">
-                      <Link to="/hotel-form" state={{ hotel: hotel }}>
-                        <h2>{hotel.hotelName}</h2>
-                      </Link>
-                      {/* delete should delete from two lists */}
-                      <button onClick={() => deleteHotelFromList(hotel)}>
-                        <img src={deleteIcon} alt="trash icon" />
-                      </button>
-                    </div>
-                    <p>{hotel.country}</p>
-                    <p>{hotel.address}</p>
-
-                    <span className="category">{categoryLabel}</span>
-                  </li>
+                  <HotelDetail
+                    key={index}
+                    categoryLabel={categoryLabel}
+                    hotel={hotel}
+                  />
                 );
               })}
             </ul>

@@ -27,6 +27,7 @@
 .hotel-listing__main-body__heading {
   font-size: 0.9375rem;
   font-weight: 400;
+  text-transform: uppercase;
 }
 
 .hotel-listing__main-body__filter-btn,
@@ -48,8 +49,8 @@
 
 .filter-modal {
   position: absolute;
-  top: 95%;
-  right: 5%;
+  top: 100%;
+  right: 0;
   border-radius: 0.625rem;
   border: 1px solid rgba(0, 0, 0, 0.25);
   background: #fff;
@@ -73,27 +74,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-}
-
-.hotel-listing__list__item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding-bottom: 1.12rem;
-  border-bottom: 1px solid #000;
-}
-
-.list__item__header {
-  display: flex;
-  justify-content: space-between;
-}
-
-.category {
-  align-self: flex-end;
-  border-radius: 0.125rem;
-  border: 1px solid #000;
-  width: fit-content;
-  padding: 0.15rem;
+  margin-bottom: 2rem;
 }
 
 .no-hotels {
@@ -104,7 +85,7 @@
   margin-top: 1rem;
 }
 
-.add-hotel-link {
+.no-hotels__add-hotel-link {
   width: fit-content;
   background-color: #1e1e1e;
   border: none;

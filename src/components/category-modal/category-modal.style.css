@@ -24,3 +24,30 @@
   margin-top: 0.5rem;
   margin-bottom: 1.2rem;
 }
+
+.modal__category-list {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.category-btn {
+  background-color: transparent;
+  border-radius: 0.125rem;
+  border: 1px solid #1e1e1e;
+  display: grid;
+  place-items: center;
+  padding: 0.25rem 0.6875rem;
+  font-size: 0.9375rem;
+}
+
+.category-btn--active {
+  background-color: #1e1e1e;
+  color: #fff;
+}
+
+.category-btn > input {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  margin: 0;
+}

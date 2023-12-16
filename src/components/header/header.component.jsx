@@ -14,12 +14,19 @@ const Header = () => {
         <img src={logo} alt="hotel building with four window pane" />
       </Link>
       <nav>
-        <Link to="hotel-form" className="add-hotel-link">
+        {window.innerWidth >= 900 && (
+          <Link onClick={() => setModalIsOpen(false)} to="/">
+            Home
+          </Link>
+        )}
+        <Link onClick={() => setModalIsOpen(false)} to="hotel-form">
           Add hotel
         </Link>
         <button
           onClick={() => setModalIsOpen(!modalIsOpen)}
-          className="create-category"
+          className={`create-category ${
+            modalIsOpen ? "create-category--active" : ""
+          }`}
         >
           Create Category
         </button>

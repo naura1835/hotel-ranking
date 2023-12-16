@@ -1,7 +1,12 @@
 import { useState } from "react";
 
 const useForm = () => {
-  const [data, setData] = useState({ hotelName: "", country: "", address: "" });
+  const [data, setData] = useState({
+    hotelName: "",
+    country: "",
+    address: "",
+    category: "",
+  });
   const [errors, setErrors] = useState({});
 
   const validate = (obj) => {
@@ -54,7 +59,7 @@ const useForm = () => {
   };
 
   const resetFormFields = () => {
-    setData({ hotelName: "", country: "", address: "" });
+    setData({ hotelName: "", country: "", address: "", category: "" });
   };
 
   return { data, errors, setData, handleChange, resetFormFields, validate };

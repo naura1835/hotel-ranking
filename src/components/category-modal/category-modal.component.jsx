@@ -1,48 +1,40 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createCategory, deleteCategory } from "../../slices/categoriesSlice";
+import { removeHotelsFromCategrory } from "../../slices/hotelSlice";
 
 import closeIcon from "../../assets/close-btn.svg";
 
 import "./category-modal.style.css";
-import { useEffect, useState } from "react";
+
+const CATEGORY = [
+  { title: "1 star", key: "oneStar" },
+  { title: "2 star", key: "twoStar" },
+  { title: "3 star", key: "threeStar" },
+];
 
 // eslint-disable-next-line react/prop-types
 const CategoryModal = ({ isOpen, setIsOpen }) => {
   const dispatch = useDispatch();
   const categoryObj = useSelector((state) => state.category.categoryGroup);
-  const categoryArr = Object.keys(categoryObj);
+  const categoryArr = Object.keys(categoryObj) || [];
+  const [selectedCategories, setSelectedCategories] = useState(categoryArr);
 
-  const [category, setCategory] = useState([
-    { title: "1 star", key: "oneStar" },
-    { title: "2 star", key: "twoStar" },
-    { title: "3 star", key: "threeStar" },
-  ]);
+  const handleCheckboxChange = (categoryName) => {
+    setSelectedCategories((prev) =>
+      prev.includes(categoryName)
+        ? prev.filter((item) => item != categoryName)
+        : [...prev, categoryName]
+    );
 
-  useEffect(() => {
-    const updateCategory = category.map((item) => ({
-      ...item,
-      isChecked: categoryArr.find((arrItem) => arrItem == item.key),
-    }));
-
-    setCategory(updateCategory);
-    //   const updatedCategories = category.map((item) => {
-    //     if (categoryArr.includes(item.key)) {
-    //       return { ...item, isChecked: true };
-    //     } else {
-    //       return item;
-    //     }
-    //   });
-
-    //   setCategory(updatedCategories);
-  }, []);
-
-  const createNewCategory = (event, categoryName) => {
-    if (event.target.checked) {
+    if (!selectedCategories.includes(categoryName)) {
       dispatch(createCategory(categoryName));
     } else {
       dispatch(deleteCategory(categoryName));
+      dispatch(removeHotelsFromCategrory(categoryName));
     }
   };
+
   return (
     <>
       <div role="dialog" className="modal">
@@ -52,20 +44,25 @@ const CategoryModal = ({ isOpen, setIsOpen }) => {
 
         <h3 className="modal__heading">CATEGORY</h3>
         <p className="modal__desc">Choose category to create a new category</p>
-        <ul>
-          {category.map((item, index) => (
+        <ul className="modal__category-list">
+          {CATEGORY.map((item, index) => (
             <li key={index}>
-              <input
-                type="checkbox"
-                value={item.key}
-                checked={item.isChecked || false}
-                onChange={(event) => createNewCategory(event, item.key)}
-              />
-              <label>{item.title}</label>
+              <label
+                className={`category-btn ${
+                  selectedCategories.includes(item.key)
+                    ? "category-btn--active"
+                    : ""
+                }`}
+              >
+                <input
+                  type="checkbox"
+                  value={item.key}
+                  checked={selectedCategories.includes(item.key)}
+                  onChange={() => handleCheckboxChange(item.key)}
+                />
+                {item.title}
+              </label>
             </li>
-            // <button key={index} onClick={() => createNewCategory(item.key)}>
-            //   {item.title}
-            // </button>
           ))}
         </ul>
       </div>

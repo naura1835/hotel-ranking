@@ -27,6 +27,14 @@ const updateHotelInformation = (hotels, hotelToUpdate) => {
   });
 };
 
+const removeDeletedCategoryLabel = (hotels, category) => {
+  return hotels.map((hotel) => {
+    if (hotel.category == category) {
+      hotel.category = "";
+    }
+  });
+};
+
 export const hotelSlice = createSlice({
   name: "hotel",
   initialState: {
@@ -42,9 +50,21 @@ export const hotelSlice = createSlice({
     deleteHotel: (state, action) => {
       state.hotelList = deleteHotelFromList(state.hotelList, action.payload);
     },
+    removeHotelsFromCategrory: (state, action) => {
+      //remove deleted category label from hotel info
+      state.hotelList = removeDeletedCategoryLabel(
+        state.hotelList,
+        action.payload
+      );
+    },
   },
 });
 
-export const { addNewHotel, editHotel, deleteHotel } = hotelSlice.actions;
+export const {
+  addNewHotel,
+  editHotel,
+  deleteHotel,
+  removeHotelsFromCategrory,
+} = hotelSlice.actions;
 
 export default hotelSlice.reducer;
