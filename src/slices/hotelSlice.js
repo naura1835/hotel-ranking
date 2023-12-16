@@ -30,8 +30,9 @@ const updateHotelInformation = (hotels, hotelToUpdate) => {
 const removeDeletedCategoryLabel = (hotels, category) => {
   return hotels.map((hotel) => {
     if (hotel.category == category) {
-      hotel.category = "";
+      return { ...hotel, category: "" };
     }
+    return hotel;
   });
 };
 

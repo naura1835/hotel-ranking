@@ -93,7 +93,7 @@ const Home = () => {
 
             <ul className="hotel-listing__list">
               {filteredHotels.map((hotel, index) => {
-                const categoryLabel = changeCategoryLabel(hotel.category);
+                const categoryLabel = changeCategoryLabel(hotel.category) || "";
 
                 return (
                   <HotelDetail

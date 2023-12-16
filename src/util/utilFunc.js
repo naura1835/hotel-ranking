@@ -30,8 +30,19 @@ export const sortList = (arr) => {
 };
 
 export const sortHotelBasedonCategory = (arr) => {
+  const categoryOrder = {
+    oneStar: 1,
+    twoStar: 2,
+    threeStar: 3,
+  };
+
   return arr.slice().sort((a, b) => {
-    // Assuming category is a string property
-    return a.category.localeCompare(b.category);
+    const categoryA = a.category || "";
+    const categoryB = b.category || "";
+
+    const orderA = categoryOrder[categoryA] || Infinity;
+    const orderB = categoryOrder[categoryB] || Infinity;
+
+    return orderA - orderB;
   });
 };

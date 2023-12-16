@@ -59,12 +59,14 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  z-index: 2;
 }
 
 .filter-modal__list-item {
   text-align: center;
   padding: 0 1rem 0.2rem;
   box-shadow: inset 0 -0.0125rem hsla(0, 0%, 12%, 1);
+  cursor: pointer;
 }
 .filter-modal__list-item:last-child {
   border-bottom: none;
